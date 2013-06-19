@@ -99,5 +99,5 @@ if [ $? -ne 0 ]; then
 fi
 
 mv .tmp-config .config
-
+patch.sh
 echo Run \|./build.sh\| to start building
