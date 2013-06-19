@@ -78,6 +78,7 @@ case "$1" in
 
 "kumquat")
 	echo DEVICE=crespo >> .tmp-config &&
+	echo LUNCH=full_kumquat-eng >> .tmp-config &&
 	repo_sync $1
 	;;
 
