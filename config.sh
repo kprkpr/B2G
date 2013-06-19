@@ -5,7 +5,7 @@ sync_flags=""
 
 repo_sync() {
 	rm -rf .repo/manifest* &&
-	$REPO init -u $GITREPO -b $BRANCH -m $1.xml &&
+	$REPO init -u $GITREPO -b $BRANCH -m fox_$1.xml &&
 	$REPO sync $sync_flags
 	ret=$?
 	if [ "$GITREPO" = "$GIT_TEMP_REPO" ]; then
@@ -30,8 +30,8 @@ case `uname` in
 	exit -1
 esac
 
-GITREPO=${GITREPO:-"git://github.com/mozilla-b2g/b2g-manifest"}
-BRANCH=${BRANCH:-v1-train}
+GITREPO=${GITREPO:-"git://github.com/feherneoh/repo-manifest"}
+BRANCH=${BRANCH:-master}
 
 while [ $# -ge 1 ]; do
 	case $1 in
@@ -71,57 +71,14 @@ echo GECKO_OBJDIR=$PWD/objdir-gecko >> .tmp-config
 echo DEVICE_NAME=$1 >> .tmp-config
 
 case "$1" in
-"galaxy-s2")
-	echo DEVICE=galaxys2 >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"galaxy-nexus")
-	echo DEVICE=maguro >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"optimus-l5")
-	echo DEVICE=m4 >> .tmp-config &&
-	repo_sync $1
-	;;
-
 "nexus-s")
 	echo DEVICE=crespo >> .tmp-config &&
 	repo_sync $1
 	;;
 
-"nexus-s-4g")
-	echo DEVICE=crespo4g >> .tmp-config &&
+"kumquat")
+	echo DEVICE=crespo >> .tmp-config &&
 	repo_sync $1
-	;;
-
-"otoro"|"unagi"|"keon"|"inari"|"leo"|"hamachi"|"peak")
-	echo DEVICE=$1 >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"tara")
-	echo DEVICE=sp8810ea >> .tmp-config &&
-	echo LUNCH=sp8810eabase-eng >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"pandaboard")
-	echo DEVICE=panda >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"emulator")
-	echo DEVICE=generic >> .tmp-config &&
-	echo LUNCH=full-eng >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"emulator-x86")
-	echo DEVICE=generic_x86 >> .tmp-config &&
-	echo LUNCH=full_x86-eng >> .tmp-config &&
-	repo_sync emulator
 	;;
 
 *)
@@ -129,21 +86,8 @@ case "$1" in
 	echo "Flags are passed through to |./repo sync|."
 	echo
 	echo Valid devices to configure are:
-	echo - galaxy-s2
-	echo - galaxy-nexus
 	echo - nexus-s
-	echo - nexus-s-4g
-	echo - otoro
-	echo - unagi
-	echo - inari
-	echo - keon
-	echo - peak
-	echo - leo
-	echo - hamachi
-	echo - tara
-	echo - pandaboard
-	echo - emulator
-	echo - emulator-x86
+	echo - kumquat
 	exit -1
 	;;
 esac
