@@ -77,8 +77,26 @@ case "$1" in
 	;;
 
 "kumquat")
-	echo DEVICE=crespo >> .tmp-config &&
+	echo DEVICE=kumquat >> .tmp-config &&
 	echo LUNCH=full_kumquat-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+
+"lotus")
+	echo DEVICE=lotus >> .tmp-config &&
+	echo LUNCH=full_lotus-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+
+"nypon")
+	echo DEVICE=nypon >> .tmp-config &&
+	echo LUNCH=full_nypon-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+
+"pepper")
+	echo DEVICE=pepper >> .tmp-config &&
+	echo LUNCH=full_pepper-eng >> .tmp-config &&
 	repo_sync $1
 	;;
 
@@ -89,6 +107,9 @@ case "$1" in
 	echo Valid devices to configure are:
 	echo - nexus-s
 	echo - kumquat
+	echo - lotus
+	echo - nypon
+	echo - pepper
 	exit -1
 	;;
 esac
