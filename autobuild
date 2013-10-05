@@ -1,0 +1,12 @@
+#!/bin/bash
+repo sync
+./patch.sh
+. build/envsetup.sh
+LUNCHLIST=$(cat $1)
+for LUNCHME in $LUNCHLIST;
+do
+	lunch $LUNCHME
+	make -j8 otapackage
+done
+mkdir release
+cp out/target/product/*/*.zip release/
