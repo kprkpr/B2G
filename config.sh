@@ -5,7 +5,7 @@ sync_flags=""
 
 repo_sync() {
 	rm -rf .repo/manifest* &&
-	$REPO init -u $GITREPO -b $BRANCH -m fox_$1.xml &&
+	$REPO init -u $GITREPO -b $BRANCH -m $1.xml &&
 	$REPO sync $sync_flags
 	ret=$?
 	if [ "$GITREPO" = "$GIT_TEMP_REPO" ]; then
@@ -31,7 +31,7 @@ case `uname` in
 esac
 
 GITREPO=${GITREPO:-"git://github.com/feherneoh/repo-manifests"}
-BRANCH=${BRANCH:-master}
+BRANCH=${BRANCH:-ffos}
 
 while [ $# -ge 1 ]; do
 	case $1 in
@@ -71,14 +71,84 @@ echo GECKO_OBJDIR=$PWD/objdir-gecko >> .tmp-config
 echo DEVICE_NAME=$1 >> .tmp-config
 
 case "$1" in
-"nexus-s")
-	echo DEVICE=crespo >> .tmp-config &&
+"anzu")
+	echo DEVICE=anzu >> .tmp-config &&
+	echo LUNCH=full_anzu-eng >> .tmp-config &&
 	repo_sync $1
 	;;
-
+"coconut")
+	echo DEVICE=coconut >> .tmp-config &&
+	echo LUNCH=full_coconut-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"es209ra")
+	echo DEVICE=es209ra >> .tmp-config &&
+	echo LUNCH=es209ra-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"haida")
+	echo DEVICE=haida >> .tmp-config &&
+	echo LUNCH=full_haida-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"hallon")
+	echo DEVICE=hallon >> .tmp-config &&
+	echo LUNCH=full_hallon-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"iyokan")
+	echo DEVICE=iyokan >> .tmp-config &&
+	echo LUNCH=full_iyokan-eng >> .tmp-config &&
+	repo_sync $1
+	;;
 "kumquat")
 	echo DEVICE=kumquat >> .tmp-config &&
 	echo LUNCH=full_kumquat-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"lotus")
+	echo DEVICE=lotus >> .tmp-config &&
+	echo LUNCH=full_lotus-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"mango")
+	echo DEVICE=mango >> .tmp-config &&
+	echo LUNCH=full_mango-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"nypon")
+	echo DEVICE=nypon >> .tmp-config &&
+	echo LUNCH=full_nypon-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"pepper")
+	echo DEVICE=pepper >> .tmp-config &&
+	echo LUNCH=full_pepper-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"satsuma")
+	echo DEVICE=satsuma >> .tmp-config &&
+	echo LUNCH=full_satsuma-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"smultron")
+	echo DEVICE=smultron >> .tmp-config &&
+	echo LUNCH=full_smultron-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"urushi")
+	echo DEVICE=urushi >> .tmp-config &&
+	echo LUNCH=full_urushi-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"zeus")
+	echo DEVICE=zeus >> .tmp-config &&
+	echo LUNCH=full_zeus-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"zeusc")
+	echo DEVICE=zeusc >> .tmp-config &&
+	echo LUNCH=full_zeusc-eng >> .tmp-config &&
 	repo_sync $1
 	;;
 
@@ -87,8 +157,24 @@ case "$1" in
 	echo "Flags are passed through to |./repo sync|."
 	echo
 	echo Valid devices to configure are:
-	echo - nexus-s
+	echo (Sony Ericsson)
+	echo - anzu
+	echo - coconut
+	echo - es209ra
+	echo - haida
+	echo - hallon
+	echo - iyokan
+	echo - mango
+	echo - satsuma
+	echo - smultron
+	echo - urushi
+	echo - zeus
+	echo - zeusc
+	echo (Sony)
 	echo - kumquat
+	echo - lotus
+	echo - nypon
+	echo - pepper
 	exit -1
 	;;
 esac
