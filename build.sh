@@ -13,5 +13,12 @@ fi
 
 . build/envsetup.sh
 lunch $LUNCH
-make -j4
-echo If build was unsuccessful, try building with the "m" command to get a user-friendly output.
+make -j6 otapackage
+if [ -e out/target/product/$DEVICE/full_$(echo $DEVICE)-ota-eng.$(whoami).zip ]
+then
+	mkdir release
+	mv out/target/product/$DEVICE/full_$(echo $DEVICE)-ota-eng.$(whoami).zip release/ffos-$(echo $DEVICE)-$(whoami)-$(date +%y%m%d).zip
+	echo Build successful. Find .zip in release/
+else
+	echo Something went wrong. Try building manually with -j1 to get human-readable messages.
+fi

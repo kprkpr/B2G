@@ -157,7 +157,7 @@ case "$1" in
 	echo "Flags are passed through to |./repo sync|."
 	echo
 	echo Valid devices to configure are:
-	echo (Sony Ericsson)
+	echo *** Sony Ericsson
 	echo - anzu
 	echo - coconut
 	echo - es209ra
@@ -170,7 +170,7 @@ case "$1" in
 	echo - urushi
 	echo - zeus
 	echo - zeusc
-	echo (Sony)
+	echo *** Sony
 	echo - kumquat
 	echo - lotus
 	echo - nypon
