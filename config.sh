@@ -4,6 +4,14 @@ REPO=${REPO:-./repo}
 sync_flags=""
 
 repo_sync() {
+	if [ -e .repo/project.list ]
+	then
+		DIRLIST=$(cat .repo/project.list)
+		for PROJECT in $DIRLIST;
+		do
+			rm -rf $PROJECT
+		done
+	fi
 	rm -rf .repo/manifest* &&
 	$REPO init -u $GITREPO -b $BRANCH -m $1.xml &&
 	$REPO sync $sync_flags
@@ -76,6 +84,11 @@ case "$1" in
 	echo LUNCH=full_anzu-eng >> .tmp-config &&
 	repo_sync $1
 	;;
+"aoba")
+	echo DEVICE=aoba >> .tmp-config &&
+	echo LUNCH=full_aoba-eng >> .tmp-config &&
+	repo_sync $1
+	;;
 "coconut")
 	echo DEVICE=coconut >> .tmp-config &&
 	echo LUNCH=full_coconut-eng >> .tmp-config &&
@@ -96,9 +109,19 @@ case "$1" in
 	echo LUNCH=full_hallon-eng >> .tmp-config &&
 	repo_sync $1
 	;;
+"hikari")
+	echo DEVICE=hikari >> .tmp-config &&
+	echo LUNCH=full_hikari-eng >> .tmp-config &&
+	repo_sync $1
+	;;
 "iyokan")
 	echo DEVICE=iyokan >> .tmp-config &&
 	echo LUNCH=full_iyokan-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"i9300")
+	echo DEVICE=i9300 >> .tmp-config &&
+	echo LUNCH=full_i9300-eng >> .tmp-config &&
 	repo_sync $1
 	;;
 "kumquat")
@@ -114,6 +137,11 @@ case "$1" in
 "mango")
 	echo DEVICE=mango >> .tmp-config &&
 	echo LUNCH=full_mango-eng >> .tmp-config &&
+	repo_sync $1
+	;;
+"nozomi")
+	echo DEVICE=nozomi >> .tmp-config &&
+	echo LUNCH=full_nozomi-eng >> .tmp-config &&
 	repo_sync $1
 	;;
 "nypon")
@@ -157,7 +185,7 @@ case "$1" in
 	echo "Flags are passed through to |./repo sync|."
 	echo
 	echo Valid devices to configure are:
-	echo *** Sony Ericsson
+	echo +--Sony Ericsson
 	echo - anzu
 	echo - coconut
 	echo - es209ra
@@ -170,11 +198,16 @@ case "$1" in
 	echo - urushi
 	echo - zeus
 	echo - zeusc
-	echo *** Sony
+	echo +--Sony
+	echo - aoba
+	echo - hikari
 	echo - kumquat
 	echo - lotus
+	echo - nozomi
 	echo - nypon
 	echo - pepper
+	echo +--Samsung
+	echo - i9300
 	exit -1
 	;;
 esac
