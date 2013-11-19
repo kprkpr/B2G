@@ -1,0 +1,41 @@
+#!/bin/sh
+if [ ! -e .repo ]
+then
+	echo "repo is not initialized."
+	echo "Please run ./config.sh first"
+	exit
+fi
+if [ ! -e .repo/local_manifests ]
+then
+	mkdir .repo/local_manifests
+fi
+if [ ! -e locals ]
+then
+	git clone https://github.com/feherneoh/repo-manifests locals
+fi
+cd locals
+git checkout b2g-locals
+VERSIONS=$(find .|grep .lxml)
+cd ..
+for FILENAME in $VERSIONS;
+do
+	if [ "./$1.lxml" == "$FILENAME" ]
+	then
+		echo "Setting version to $1"
+		cp locals/$1.lxml .repo/local_manifests/b2g.xml
+		rm .b2gversion
+		echo "B2GVER=$1" > .b2gversion
+		echo "Pulling changes..."
+		./repo sync
+		echo "Applying patches..."
+		./patch.sh
+		exit
+	fi
+done
+echo "Setting version to master"
+rm .repo/local_manifests/b2g.xml
+rm .b2gversion
+echo "Pulling changes"
+./repo sync
+echo "Applying patches"
+./patch.sh

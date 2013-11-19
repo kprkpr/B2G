@@ -1,12 +1,12 @@
 #!/bin/bash
-repo sync
-./patch.sh
-. build/envsetup.sh
-LUNCHLIST=$(cat $1)
-for LUNCHME in $LUNCHLIST;
+echo $1
+echo $2
+DEVICES=$(cat $1)
+echo $DEVICES
+for DEVICENAME in $DEVICES;
 do
-	lunch $LUNCHME
-	make -j8 otapackage
+	echo $DEVICENAME
+	./config.sh $DEVICENAME
+	./setversion $2
+	./build.sh
 done
-mkdir release
-cp out/target/product/*/*.zip release/
