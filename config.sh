@@ -94,6 +94,11 @@ case "$1" in
 	echo LUNCH=full_coconut-eng >> .tmp-config &&
 	repo_sync $1
 	;;
+"e400")
+	echo DEVICE=e400 >> .tmp-config &&
+	echo LUNCH=full_e400-eng >> .tmp-config &&
+	repo_sync $1
+	;;
 "es209ra")
 	echo DEVICE=es209ra >> .tmp-config &&
 	echo LUNCH=es209ra-eng >> .tmp-config &&
@@ -185,6 +190,8 @@ case "$1" in
 	echo "Flags are passed through to |./repo sync|."
 	echo
 	echo Valid devices to configure are:
+	echo +--LG
+	echo - e400
 	echo +--Sony Ericsson
 	echo - anzu
 	echo - coconut
