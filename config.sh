@@ -99,6 +99,11 @@ case "$1" in
 	echo LUNCH=full_e400-eng >> .tmp-config &&
 	repo_sync $1
 	;;
+"kylessopen")
+	echo DEVICE=kylessopen >> .tmp-config &&
+	echo LUNCH=cm_kylessopen-userdebug >> .tmp-config &&
+	repo_sync $1
+;;
 "es209ra")
 	echo DEVICE=es209ra >> .tmp-config &&
 	echo LUNCH=es209ra-eng >> .tmp-config &&
