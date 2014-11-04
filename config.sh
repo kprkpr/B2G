@@ -101,7 +101,7 @@ case "$1" in
 	;;
 "kylessopen")
 	echo DEVICE=kylessopen >> .tmp-config &&
-	echo LUNCH=cm_kylessopen-userdebug >> .tmp-config &&
+	echo LUNCH=full_kylessopen-userdebug >> .tmp-config &&
 	repo_sync $1
 ;;
 "es209ra")
